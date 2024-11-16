@@ -3,8 +3,12 @@ package com.project.quiz.app.service;
 import com.project.quiz.app.Question;
 import com.project.quiz.app.dao.QuestionDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,21 +17,36 @@ public class QuestionService {
     @Autowired
     QuestionDao questionDao;
 
-    public List<Question> getAllQuestions() {
-        return questionDao.findAll();
+    public ResponseEntity<List<Question>> getAllQuestions() {
+        try {
+            return new ResponseEntity<>(questionDao.findAll(), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 
-    public List<Question> getQuestionsByCategory(String category) {
-        return questionDao.findByCategory(category);
+
+    public ResponseEntity<List<Question>> getQuestionsByCategory(String category) {
+        try {
+            return new ResponseEntity<>(questionDao.findByCategory(category), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 
-    public String addQuestion(Question question) {
-        questionDao.save(question);
-        return "Success";
+    public ResponseEntity<String> addQuestion(Question question) {
+        try {
+            questionDao.save(question);
+            return new ResponseEntity<>("Question added successfully!", HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Error adding question.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-    public String updateQuestion(Integer id, Question question) {
-
+    public ResponseEntity<String> updateQuestion(Integer id, Question question) {
         //Optional is a container that wraps a value (in this case, a Question object).
         //It can either contain a value of type Question or be empty (i.e., not contain a value).
         //Instead of returning null when a value is not found, methods like findById() in JpaRepository return an Optional to indicate that the value might be missing.
@@ -49,20 +68,19 @@ public class QuestionService {
             updatedQuestion.setCategory(question.getCategory());
 
             questionDao.save(updatedQuestion);
-            return "Question updated successfully!";
+            return new ResponseEntity<>("Question updated successfully!", HttpStatus.OK);
         } else {
-            // If the question doesn't exist, return a message
-            return "Question not found!";
+            return new ResponseEntity<>("Question not found!", HttpStatus.NOT_FOUND);
         }
+
     }
 
-    public String deleteQuestion(Integer id) {
-
-       Optional<Question> existingQuestion =  questionDao.findById(id);
-        if (existingQuestion.isPresent()) { //checks whether the Optional contains a value.
+    public ResponseEntity<String> deleteQuestion(Integer id) {
+        Optional<Question> existingQuestion = questionDao.findById(id);
+        if (existingQuestion.isPresent()) {
             questionDao.deleteById(id);
-            return "Question deleted successfully";
-    }
-        return "Question not found";
+            return new ResponseEntity<>("Question deleted successfully!", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Question not found!", HttpStatus.NOT_FOUND);
     }
 }
