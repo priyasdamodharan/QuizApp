@@ -1,9 +1,8 @@
 package com.project.quiz.app.service;
 
-import com.project.quiz.app.Question;
+import com.project.quiz.app.model.Question;
 import com.project.quiz.app.dao.QuestionDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
