@@ -13,7 +13,7 @@ PostgreSQL: Relational database management system.
 
 **Features**
 
-Dynamic Question Generation: Generate quizzes with random questions based on categories and difficulty.
+Dynamic Question Generation: Generate quizzes with random questions based on category.
 
 RESTful APIs: Expose endpoints for creating, updating, and managing quizzes and questions.
 
