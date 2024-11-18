@@ -1,8 +1,8 @@
 **Quiz Application**
 
 **Problem Statement**
-Description: The application aims to provide a dynamic and interactive platform for quizzes, catering to educators, students, and quiz enthusiasts.
-Challenge: Originally a monolithic app, it was refactored to microservices to address scalability and maintenance challenges.
+The application aims to provide a dynamic and interactive platform for quizzes, catering to educators, students, and quiz enthusiasts.
+Challenge: Originally developed a monolithic app, and it was refactored to microservices to address scalability and maintenance challenges.
 
 **Tech Stack**
 Java: Core programming language.
@@ -29,6 +29,7 @@ API Gateway: Centralized routing and load balancing using Spring Cloud Gateway.
 The backend was developed without a user interface. Testing of API endpoints and functionality, including adding questions, creating quizzes, retrieving quiz questions, and getting quiz scores, was performed using Postman and web browsers.
 
 **Future Work and Ideas**
+
 Create User Interface: Design a user-friendly interface for quiz creation and participation.
 
 User Roles: Implement roles such as Admin (create quizzes) and Users (take quizzes).
@@ -36,5 +37,7 @@ User Roles: Implement roles such as Admin (create quizzes) and Users (take quizz
 Security: Implement OAuth/JWT for secure login.
 
 Service Registry: Explore using Consul for service discovery.
+
 Caching: Use Redis for caching frequently used quiz data.
+
 Health Checks: Add endpoints to monitor service status.
