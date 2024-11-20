@@ -5,11 +5,11 @@ The application aims to provide a dynamic and interactive platform for quizzes, 
 Challenge: Originally developed a monolithic app, and it was refactored to microservices to address scalability and maintenance challenges.
 
 **Tech Stack**
-Java: Core programming language.
-Spring Boot: Framework for building backend services.
-Lombok Library: Reduces boilerplate code.
-Spring JPA: For database interactions.
-PostgreSQL: Relational database management system.
+Java,
+Spring Boot,
+Lombok Library,
+Spring JPA,
+PostgreSQL
 
 **Features**
 
